@@ -36,7 +36,7 @@ jobs:
 
       - name: "[DEV] Deploy to S3"
         run: | 
-          aws s3 sync ./dist s3://${{ secrets.AWS_DEV_BUCKET_NAME }} --delete --exclude "*/test.mem" --exclude "*/test.res" --exclude "*/test.wasm"  --exclude "*/test.xod"
+          aws s3 sync ./dist s3://${{ secrets.AWS_DEV_BUCKET_NAME }}
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
