@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3.4.1
 
-      - name: Caching application
+      - name: "[DEV] Caching application"
         id: react-vite
         uses: actions/cache@v3.0.8
         with:
@@ -27,17 +27,15 @@ jobs:
           key: ${{ runner.os }}-react-terraform-aws-${{ github.run_id }}
           restore-keys: |
               ${{ runner.os }}-react-terraform-aws-
-      - name: Install packages
+      - name: "[DEV] Install packages"
         run: yarn install
-      - name: Run build
+      - name: "[DEV] Build"
         run: yarn build
-      - name: "Show"
-        run: echo '${{ secrets.AWS_ID }}'
-      - name: Configure AWS Credentials
+      - name: "[DEV] Configure AWS Credentials"
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: "us-east-1"
-      - name: "[DEV] S3"
+      - name: "[DEV] Deploy to S3"
         run: aws s3 sync ./dist s3://${{ secrets.AWS_DEV_BUCKET_NAME }} --delete --exclude "*/test.mem" --exclude "*/test.res" --exclude "*/test.wasm"  --exclude "*/test.xod"
