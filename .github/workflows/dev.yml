@@ -3,6 +3,9 @@ name: "[DEV] Deploy"
 on:
   push:
     branches: [ "develop" ]
+permissions:
+  id-token: write
+  contents: read
 
   workflow_dispatch:
 
