@@ -31,6 +31,8 @@ jobs:
         run: yarn install
       - name: Run build
         run: yarn build
+      - name: "Show"
+        run: echo ${{ secrets.AWS_ID }}
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
