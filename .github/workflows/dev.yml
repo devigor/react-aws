@@ -3,11 +3,10 @@ name: "[DEV] Deploy"
 on:
   push:
     branches: [ "develop" ]
+  workflow_dispatch:
 permissions:
   id-token: write
   contents: read
-
-  workflow_dispatch:
 
 jobs:
   build:
