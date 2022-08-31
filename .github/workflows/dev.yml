@@ -35,6 +35,7 @@ jobs:
         run: yarn build
 
       - name: "[DEV] Deploy to S3"
+        run: echo ${{ secrets.AWS_ACCESS_KEY_ID }}
         run: | 
           aws s3 sync ./dist s3://'$AWS_PROD_BUCKET_NAME'
         env:
